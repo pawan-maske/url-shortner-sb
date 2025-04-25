@@ -9,6 +9,8 @@ import java.util.List;
 @Entity
 @Data
 public class UrlMapping {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime createdDate;
     private String originalUrl;
@@ -19,7 +21,7 @@ public class UrlMapping {
     @JoinColumn(name="user_id")
     private User user;
 
-    @OneToMany
+    @OneToMany(mappedBy = "urlMapping")
     private List<ClickEvent> clickEvents;
 
 
