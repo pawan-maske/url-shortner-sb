@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -22,6 +21,7 @@ public class UserDetailsImpl implements UserDetails {
     private String username;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
+
 
     public UserDetailsImpl(Long id, String email, String username, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;

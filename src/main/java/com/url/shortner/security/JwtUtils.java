@@ -7,25 +7,30 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.security.Key;
 import java.util.Date;
 import java.util.stream.Collectors;
 
+@Component
 public class JwtUtils {
 
-    @Value("$jwt.secret")
-    private String jwtSecret;
+    //@Value("${jwt.secret}")
+    //comment this field before commiting
+    private final String jwtSecret = "";
 
-    @Value("$jwt.expiry")
-    private int jwtExpiry;
+    //@Value("${jwt.expiry}")
+    private final int jwtExpiry = 172800000;
+
     public String getJwtTokenFromHeader(HttpServletRequest request){
         String bearerToken = request.getHeader("Authorization");
         if (bearerToken!= null && bearerToken.startsWith("Bearer ")){
             return bearerToken.substring(7);
         }
         return null;
+
     }
 
     public String getUserNameFromJwtToken(String token){
