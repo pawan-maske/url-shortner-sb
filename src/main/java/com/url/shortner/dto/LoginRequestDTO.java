@@ -2,14 +2,8 @@ package com.url.shortner.dto;
 
 import lombok.Data;
 
-import java.util.Set;
-
 @Data
-public class RegisterRequest {
-
+public class LoginRequestDTO {
     private String username;
-    private String email;
     private String password;
-    private Set<String> role;
-
 }

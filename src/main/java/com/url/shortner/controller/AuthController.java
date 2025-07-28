@@ -1,8 +1,10 @@
 package com.url.shortner.controller;
 
-import com.url.shortner.dto.RegisterRequest;
+import com.url.shortner.dto.LoginRequestDTO;
+import com.url.shortner.dto.RegisterRequestDTO;
 import com.url.shortner.models.User;
 import com.url.shortner.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,15 +18,20 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @PostMapping("/public/register")
-    public ResponseEntity<?> registerUser(@RequestBody RegisterRequest registerRequest){
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequestDTO registerRequestDTO){
         User user = new User();
-        user.setUsername(registerRequest.getUsername());
-        user.setEmail(registerRequest.getEmail());
-        user.setPassword(registerRequest.getPassword());
+        user.setUsername(registerRequestDTO.getUsername());
+        user.setEmail(registerRequestDTO.getEmail());
+        user.setPassword(registerRequestDTO.getPassword());
         user.setRole("ROLE_USER");
         userService.registerUser(user);
         return ResponseEntity.ok("User Registered Succesfully");
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<?> loginUser(@Valid @RequestBody LoginRequestDTO loginRequestDTO){
+        return ResponseEntity.ok(userService.authenticateUser(loginRequestDTO));
     }
 
 

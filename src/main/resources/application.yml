@@ -22,6 +22,14 @@ management:
 server:
   port: 8080
 
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+    url:
+      shortner: DEBUG
+
 
 
 
